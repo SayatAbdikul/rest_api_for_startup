@@ -18,5 +18,6 @@ func main() {
 		panic(err.Error())
 	}
 	http.HandleFunc("/regStartup", post.RegStartup)
+	http.HandleFunc("/regTeam", post.RegTeam)
 	http.ListenAndServe(":9090", nil)
 }
