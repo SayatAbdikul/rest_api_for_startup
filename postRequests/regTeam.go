@@ -29,6 +29,19 @@ func RegTeam(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	if len(team) > 0 {
+		fmt.Println("tadam")
+		stmt, err := server.DBConn.Prepare("UPDATE startups SET team_size=team_size+? WHERE id=?")
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		_, err = stmt.Exec(len(team), team[0].StartupID)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+	}
 	for _, val := range team {
 		stmt, err := server.DBConn.Prepare("INSERT INTO team (name, role, description, startup_id) VALUES (?, ?, ?, ?)")
 		if err != nil {

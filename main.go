@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	get "github.com/SayatAbdikul/rest_api_for_startup/getRequests"
 	post "github.com/SayatAbdikul/rest_api_for_startup/postRequests"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	_ "github.com/go-sql-driver/mysql"
@@ -19,5 +20,7 @@ func main() {
 	}
 	http.HandleFunc("/regStartup", post.RegStartup)
 	http.HandleFunc("/regTeam", post.RegTeam)
+	http.HandleFunc("/regAchievements", post.RegAchievements)
+	http.HandleFunc("/get_startups", get.GetStartups)
 	http.ListenAndServe(":9090", nil)
 }
