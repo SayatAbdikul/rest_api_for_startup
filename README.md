@@ -160,4 +160,16 @@ the sample request:
     "achievement":"some achievement",
     }   
 The response of API: "the patch request was completed successfully"
+# Delete requests   
+for all delete requests you should just send a json request with id of an element.  
+Example:   
+{
+"id": 3,
+}   
+response: "the delete request completed successfully"
+all delete requests:   
+1. /delete_startup
+2. /delete_achievement
+3. /delete_team_member
+
 
