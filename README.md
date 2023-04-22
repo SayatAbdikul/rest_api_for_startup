@@ -120,4 +120,44 @@ The sample json for response:
     }
   ]
 }
+# Patch requests
+1. /patch_startup   
+
+the sample request:  
+{
+    "id": 1,
+    "name": "Test Startup",
+    "login": "test_startup",
+    "password": "test_password",
+    "email": "test@example.com",
+    "logo": "https://example.com/test_startup_logo.jpg",
+    "lowestInvestment": 1000,
+    "highestInvestment": 10000,
+    "region": "Kazakhstan",
+    "website": "https://teststartup.com"
+}   
+The response of API: "the data was successfully updated"   
+2. /patch_startup_description   
+the sample request:  
+{
+    "startup_id": 1,
+    "description": "some changes"
+}   
+The response of API: "the patch request was completed successfully"   
+3. /patch_team   
+the sample request:  
+{
+    "id": 5,
+    "name":"Sayat",
+    "role":"programmer",
+    "Description":"someone",
+    }   
+The response of API: "the patch request was completed successfully"
+4. /patch_achievement   
+the sample request:  
+{
+    "id": 5,
+    "achievement":"some achievement",
+    }   
+The response of API: "the patch request was completed successfully"
 
