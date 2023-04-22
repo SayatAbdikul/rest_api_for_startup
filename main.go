@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"github.com/SayatAbdikul/rest_api_for_startup/authorization"
 	delete "github.com/SayatAbdikul/rest_api_for_startup/deleteRequests"
 	get "github.com/SayatAbdikul/rest_api_for_startup/getRequests"
 	patch "github.com/SayatAbdikul/rest_api_for_startup/patchRequests"
@@ -30,5 +31,6 @@ func main() {
 	http.HandleFunc("/delete_startup", delete.DeleteStartup)
 	http.HandleFunc("/delete_achievement", delete.DeleteAchievement)
 	http.HandleFunc("/delete_team_member", delete.DeleteTeamMember)
+	http.HandleFunc("/auth_startup", authorization.StartupAuthorization)
 	http.ListenAndServe(":9090", nil)
 }
