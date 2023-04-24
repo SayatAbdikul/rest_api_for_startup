@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func DeleteStartup(w http.ResponseWriter, r *http.Request) {
+func DeleteInvestor(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "DELETE" {
 		fmt.Fprintf(w, "the method of request is not delete")
 	}
@@ -18,22 +18,17 @@ func DeleteStartup(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	_, err = server.DBConn.Exec("DELETE FROM startups WHERE id=?", element.ID)
+	_, err = server.DBConn.Exec("DELETE FROM investors WHERE id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	_, err = server.DBConn.Exec("DELETE FROM favourite_investors WHERE startup_id=?", element.ID)
+	_, err = server.DBConn.Exec("DELETE FROM favourite_startups WHERE investor_id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	_, err = server.DBConn.Exec("DELETE FROM team WHERE startup_id=?", element.ID)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-	_, err = server.DBConn.Exec("DELETE FROM achievements WHERE startup_id=?", element.ID)
+	_, err = server.DBConn.Exec("DELETE FROM cases WHERE investor_id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)
 		return

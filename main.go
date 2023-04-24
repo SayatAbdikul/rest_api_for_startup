@@ -35,6 +35,7 @@ func main() {
 	http.HandleFunc("/patch_team", patch.PatchTeam)
 	http.HandleFunc("/patch_startup_achievement", patch.PatchStartupAchievement)
 	http.HandleFunc("/delete_startup", delete.DeleteStartup)
+	http.HandleFunc("/delete_investor", delete.DeleteInvestor)
 	http.HandleFunc("/delete_achievement", delete.DeleteAchievement)
 	http.HandleFunc("/delete_team_member", delete.DeleteTeamMember)
 	http.HandleFunc("/auth_startup", authorization.StartupAuthorization)

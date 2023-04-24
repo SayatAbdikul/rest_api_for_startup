@@ -35,6 +35,7 @@ type WholeStartup struct {
 	TeamSize          int           `json:"team_size"`
 	Industry          string        `json:"industry"`
 	Team              []Member      `json:"team"`
+	Favourites        []Favourite   `json:"favourites"`
 	Achievements      []Achievement `json:"achievements"`
 }
 
@@ -69,6 +70,21 @@ func GetStartup(w http.ResponseWriter, r *http.Request) {
 		startup.Team = append(startup.Team, member)
 	}
 	members.Close()
+	favourites, err := server.DBConn.Query("SELECT * FROM favourite_investors WHERE startup_id=" + string(id))
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	for favourites.Next() {
+		var favourite Favourite
+		err = favourites.Scan(&favourite.ID, &favourite.InvestorID, &favourite.StartupID)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		startup.Favourites = append(startup.Favourites, favourite)
+	}
+	favourites.Close()
 	achievements, err := server.DBConn.Query("SELECT * FROM achievements WHERE startup_id=" + string(id))
 	defer achievements.Close()
 	if err != nil {
