@@ -17,6 +17,8 @@ type Investor struct {
 	Picture     string `json:"picture"`
 	Region      string `json:"region"`
 	WebSite     string `json:"website"`
+	Investment  int    `json:"investment"`
+	Industry    string `json:"industry"`
 }
 
 func RegInvestor(w http.ResponseWriter, r *http.Request) {
@@ -35,14 +37,14 @@ func RegInvestor(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	stmt, err := server.DBConn.Prepare("INSERT INTO investors (name, login, password, email, " +
-		"description, picture, region, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+		"description, picture, region, website, investment, industry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	defer stmt.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 	_, err = stmt.Exec(query.Name, query.Login, query.Password, query.Email, query.Description,
-		query.Picture, query.Region, query.WebSite)
+		query.Picture, query.Region, query.WebSite, query.Investment, query.Industry)
 	if err != nil {
 		log.Fatal(err)
 		return

@@ -19,6 +19,7 @@ type Startup struct {
 	HighestInvestment int    `json:"highestInvestment"`
 	Region            string `json:"region"`
 	WebSite           string `json:"website"`
+	Industry          string `json:"industry"`
 }
 
 func RegStartup(w http.ResponseWriter, r *http.Request) {
@@ -37,14 +38,14 @@ func RegStartup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	stmt, err := server.DBConn.Prepare("INSERT INTO startups (name, login, password, email, " +
-		"description, logo, lowest_investment, highest_investment, region, website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+		"description, logo, lowest_investment, highest_investment, region, website, industry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	defer stmt.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 	_, err = stmt.Exec(query.Name, query.Login, query.Password, query.Email, query.Description, query.Logo,
-		query.LowestInvestment, query.HighestInvestment, query.Region, query.WebSite)
+		query.LowestInvestment, query.HighestInvestment, query.Region, query.WebSite, query.Industry)
 	if err != nil {
 		log.Fatal(err)
 		return

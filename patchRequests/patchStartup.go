@@ -19,6 +19,7 @@ type Startup struct {
 	HighestInvestment int    `json:"highestInvestment"`
 	Region            string `json:"region"`
 	WebSite           string `json:"website"`
+	Industry          string `json:"industry"`
 }
 
 func PatchStartup(w http.ResponseWriter, r *http.Request) {
@@ -33,14 +34,14 @@ func PatchStartup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	query, err := server.DBConn.Prepare("UPDATE startups SET name=?, login=?, password=?, email=?, " +
-		"logo=?, lowest_investment=?, highest_investment=?, region=?, website=? WHERE id=?")
+		"logo=?, lowest_investment=?, highest_investment=?, region=?, website=?, industry=? WHERE id=?")
 	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 	_, err = query.Exec(&startup.Name, &startup.Login, &startup.Password, &startup.Email,
-		&startup.Logo, &startup.LowestInvestment, &startup.HighestInvestment, &startup.Region, &startup.WebSite, &startup.ID)
+		&startup.Logo, &startup.LowestInvestment, &startup.HighestInvestment, &startup.Region, &startup.WebSite, &startup.Industry, &startup.ID)
 	if err != nil {
 		log.Fatal(err)
 		return

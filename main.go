@@ -27,6 +27,8 @@ func main() {
 	http.HandleFunc("/reg_favourite_startup", post.RegFavouriteStartup)
 	http.HandleFunc("/reg_favourite_investor", post.RegFavouriteInvestor)
 	http.HandleFunc("/get_startups", get.GetStartups)
+	http.HandleFunc("/get_investors", get.GetInvestors)
+	http.HandleFunc("/get_investor", get.GetInvestor)
 	http.HandleFunc("/get_startup", get.GetStartup)
 	http.HandleFunc("/patch_startup", patch.PatchStartup)
 	http.HandleFunc("/patch_startup_description", patch.PatchStartupDescription)

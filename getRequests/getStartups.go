@@ -21,6 +21,7 @@ type Startup struct {
 	Region            string `json:"region"`
 	WebSite           string `json:"website"`
 	TeamSize          int    `json:"team_size"`
+	Industry          string `json:"industry"`
 }
 
 func GetStartups(w http.ResponseWriter, r *http.Request) {
@@ -35,6 +36,7 @@ func GetStartups(w http.ResponseWriter, r *http.Request) {
 	highestTeam := params.Get("highestTeam")
 	lowestInvestment := params.Get("lowestInvestment")
 	highestInvestment := params.Get("highestInvestment")
+	sort := params.Get("sort")
 	ok := 0
 	request := "SELECT * FROM startups WHERE"
 	if region != "" {
@@ -60,6 +62,12 @@ func GetStartups(w http.ResponseWriter, r *http.Request) {
 		newStr := request[:len(request)-6]
 		request = newStr
 	}
+	if sort == "ascending" {
+		request += " ORDER BY name ASC"
+	}
+	if sort == "descending" {
+		request += " ORDER BY name DESC"
+	}
 	fmt.Println(request)
 	var startups []Startup
 	rows, err := server.DBConn.Query(request)
@@ -72,7 +80,7 @@ func GetStartups(w http.ResponseWriter, r *http.Request) {
 		var startup Startup
 		err = rows.Scan(&startup.ID, &startup.Name, &startup.Login, &startup.Password,
 			&startup.Email, &startup.Description, &startup.Logo, &startup.LowestInvestment, &startup.HighestInvestment,
-			&startup.Region, &startup.WebSite, &startup.TeamSize)
+			&startup.Region, &startup.WebSite, &startup.TeamSize, &startup.Industry)
 		if err != nil {
 			log.Fatal(err)
 			return

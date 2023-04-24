@@ -21,7 +21,7 @@ type Achievement struct {
 	StartupID int    `json:"startupID"`
 }
 type WholeStartup struct {
-	ID                string        `json:"startup_id"`
+	ID                int           `json:"startup_id"`
 	Name              string        `json:"name"`
 	Login             string        `json:"login"`
 	Password          string        `json:"password"`
@@ -33,6 +33,7 @@ type WholeStartup struct {
 	Region            string        `json:"region"`
 	WebSite           string        `json:"website"`
 	TeamSize          int           `json:"team_size"`
+	Industry          string        `json:"industry"`
 	Team              []Member      `json:"team"`
 	Achievements      []Achievement `json:"achievements"`
 }
@@ -48,8 +49,12 @@ func GetStartup(w http.ResponseWriter, r *http.Request) {
 	var startup WholeStartup
 	err := query.Scan(&startup.ID, &startup.Name, &startup.Login, &startup.Password,
 		&startup.Email, &startup.Description, &startup.Logo, &startup.LowestInvestment, &startup.HighestInvestment,
-		&startup.Region, &startup.WebSite, &startup.TeamSize)
+		&startup.Region, &startup.WebSite, &startup.TeamSize, &startup.Industry)
 	if err != nil {
+		if err.Error() == "sql: no rows in result set" {
+			fmt.Fprintf(w, "{}")
+			return
+		}
 		log.Fatal(err)
 		return
 	}
