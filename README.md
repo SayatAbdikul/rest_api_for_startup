@@ -1,12 +1,12 @@
 # rest_api_for_startup
 REST API for project where startups and investors connect with each other. Here you will see how to work with this API.
 # endpoints for post requests
-1. /regStartup   
+1. /reg_startup  
 
 The sample json for request:   
 
 {
-    "name": "Test Startup",
+    "name": "название на кириллице",
     "login": "test_startup",
     "password": "test_password",
     "email": "test@example.com",
@@ -15,10 +15,11 @@ The sample json for request:
     "lowestInvestment": 1000,
     "highestInvestment": 10000,
     "region": "Kazakhstan",
-    "website": "https://teststartup.com"
+    "website": "https://teststartup.com",
+    "industry": "IT"
 }   
 The response of API: "data entered successfully"   
-2. /regTeam   
+2. /reg_team   
 
 The sample json for request:   
 
@@ -37,7 +38,7 @@ The sample json for request:
     }
 ]   
 The response of API: "all records were saved"  
-3. /regAchievements   
+3. /reg_achievements   
 
 The sample json for request:   
 
@@ -52,7 +53,53 @@ The sample json for request:
     }
 ]   
 
-The response of API: "all records were saved" 
+The response of API: "all records were saved"   
+4. /reg_investor   
+The sample json for request:   
+{
+    "name": "John Doe",
+    "login": "johndoe",
+    "password": "password123",
+    "email": "johndoe@example.com",
+    "description": "I'm an angel investor interested in fintech startups.",
+    "picture": "https://example.com/pictures/johndoe.jpg",
+    "region": "San Francisco",
+    "website": "https://johndoe.com",
+    "investment": 500000,
+    "industry": "Fintech"
+}   
+The response of API: "data entered successfully"   
+5. /reg_cases   
+The sample json for request:   
+[
+		{
+			"title": "My Startup Case 1",
+			"description": "This is a description of my startup case.",
+			"investment": 10000,
+			"investor_id": 1
+		},
+		{
+			"title": "My Startup Case 2",
+			"description": "This is another description of my startup case.",
+			"investment": 20000,
+			"investor_id": 1
+		}
+	]   
+The response of API: "all records were saved"    
+6. /reg_favourite_startup   
+The sample json for request:   
+{
+    "id": 123,
+    "investorID": 456
+}   
+The response of API: "all data was entered successfully"   
+7. /reg_favourite_investor   
+The sample json for request:   
+{
+    "id": 123,
+    "startupID": 456
+}   
+The response of API: "all data was entered successfully"
 # Get requests  
 1. sample url request: /get_startups?region=Kazakhstan&category=&lowestTeam=&highestTeam=&lowestInvestment=&highestInvestment=   
 
