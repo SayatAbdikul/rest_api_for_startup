@@ -7,7 +7,17 @@ import (
 	"net/http"
 )
 
-func StartupAuthorization(w http.ResponseWriter, r *http.Request) {
+type AuthData struct {
+	Login    string `json:"login"`
+	Password string `json:"password"`
+}
+type OutData struct {
+	ID          int    `json:"id"`
+	Login       string `json:"login"`
+	ErrorStatus bool   `json:"errorStatus"`
+}
+
+func InvestorAuthorization(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "the request type is not a post")
 		return
@@ -18,7 +28,7 @@ func StartupAuthorization(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 	var data OutData
-	query, err := server.DBConn.Prepare("SELECT id, login FROM startups WHERE login=? and password=?")
+	query, err := server.DBConn.Prepare("SELECT id, login FROM investors WHERE login=? and password=?")
 	rows, err := query.Query(authData.Login, authData.Password)
 	defer rows.Close()
 	for rows.Next() {
