@@ -19,11 +19,11 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	http.HandleFunc("/regStartup", post.RegStartup)
-	http.HandleFunc("/regTeam", post.RegTeam)
-	http.HandleFunc("/regAchievements", post.RegAchievements)
-	http.HandleFunc("/regInvestor", post.RegInvestor)
-	http.HandleFunc("/regCases", post.RegCases)
+	http.HandleFunc("/reg_startup", post.RegStartup)
+	http.HandleFunc("/reg_team", post.RegTeam)
+	http.HandleFunc("/reg_achievement", post.RegAchievements)
+	http.HandleFunc("/reg_investor", post.RegInvestor)
+	http.HandleFunc("/reg_cases", post.RegCases)
 	http.HandleFunc("/reg_favourite_startup", post.RegFavouriteStartup)
 	http.HandleFunc("/reg_favourite_investor", post.RegFavouriteInvestor)
 	http.HandleFunc("/get_startups", get.GetStartups)
