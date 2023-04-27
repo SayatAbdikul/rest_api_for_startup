@@ -5,39 +5,39 @@ REST API for project where startups and investors connect with each other. Here 
 
 The sample json for request:   
 
-{
-    "name": "название на кириллице",
-    "login": "test_startup",
-    "password": "test_password",
-    "email": "test@example.com",
-    "description": "This is a test startup.",
-    "logo": "https://example.com/test_startup_logo.jpg",
-    "lowestInvestment": 1000,
-    "highestInvestment": 10000,
-    "region": "Kazakhstan",
-    "website": "https://teststartup.com",
-    "industry": "IT"
+{  
+    "name": "название на кириллице",  
+    "login": "test_startup",  
+    "password": "test_password",  
+    "email": "test@example.com",  
+    "description": "This is a test startup.",  
+    "logo": "https://example.com/test_startup_logo.jpg",  
+    "lowestInvestment": 1000,  
+    "highestInvestment": 10000,  
+    "region": "Kazakhstan",  
+    "website": "https://teststartup.com",  
+    "industry": "IT"  
 }   
 The response of API: "data entered successfully"   
 2. /reg_team   
 
 The sample json for request:   
 
-[
-    {
-        "name":"Sayat",
-        "role":"programmer",
-        "Description":"someone",
-        "startup_id":4
-    }, 
-    {
-        "name":"Sayat",
-        "role":"programmer",
-        "Description":"someone",
-        "startup_id":4
-    }
-]   
-The response of API: "all records were saved"  
+[  
+    {  
+        "name":"Sayat",  
+        "role":"programmer",  
+        "Description":"someone",  
+        "startup_id":4  
+    },   
+    {  
+        "name":"Sayat",  
+        "role":"programmer",  
+        "Description":"someone",  
+        "startup_id":4  
+    }  
+]     
+The response of API: "all records were saved"    
 3. /reg_achievements   
 
 The sample json for request:   
@@ -356,7 +356,36 @@ Example:
 response: "the delete request completed successfully"
 all delete requests:   
 1. /delete_startup
-2. /delete_achievement
-3. /delete_team_member
+2. /delete_investor
+3. /delete_achievement   
+4. /delete_case   
+5. /delete_favourite_startup   
+6. /delete_favourite_investor   
+7. /delete_team_member   
+# Authorization requests   
+1. /auth_startup   
+the sample request:  
+{
+  "login": "example_login",
+  "password": "example_password"
+}   
+The response of API: {
+  "id": 1,
+  "login": "example_login",
+  "error_status": false
+}   
+2. /auth_investor   
+the sample request:  
+{
+  "login": "example_login",
+  "password": "example_password"
+}   
+The response of API: {
+  "id": 1,
+  "login": "example_login",
+  "error_status": false
+}   
+
+
 
 
