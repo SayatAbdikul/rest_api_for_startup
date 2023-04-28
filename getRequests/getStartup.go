@@ -3,6 +3,7 @@ package getRequests
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -44,6 +45,7 @@ func GetStartup(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "wrong method type")
 		return
 	}
+	other.AccessSetter(w)
 	params := r.URL.Query()
 	id := params.Get("id")
 	query := server.DBConn.QueryRow("SELECT * FROM startups WHERE id=?", id)

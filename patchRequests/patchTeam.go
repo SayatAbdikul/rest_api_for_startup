@@ -3,6 +3,7 @@ package patchRequests
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -20,6 +21,7 @@ func PatchTeam(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
+	other.AccessSetter(w)
 	var newContent Member
 	err := json.NewDecoder(r.Body).Decode(&newContent)
 	if err != nil {

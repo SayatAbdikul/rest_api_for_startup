@@ -3,6 +3,7 @@ package postRequests
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -18,6 +19,7 @@ func RegFavouriteStartup(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method of the request is not a post type")
 		return
 	}
+	other.AccessSetter(w)
 	var data FavStartup
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {

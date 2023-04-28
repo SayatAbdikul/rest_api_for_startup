@@ -3,6 +3,7 @@ package getRequests
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -29,6 +30,7 @@ func GetStartups(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "wrong method type")
 		return
 	}
+	other.AccessSetter(w)
 	params := r.URL.Query()
 	region := params.Get("region")
 	category := params.Get("category")

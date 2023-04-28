@@ -3,6 +3,7 @@ package postRequests
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -16,9 +17,7 @@ type Case struct {
 }
 
 func RegCases(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	other.AccessSetter(w)
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "error: the request is not a POST type")
 		return

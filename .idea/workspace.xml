@@ -5,7 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="177ad474-ab6c-49b7-8f91-058e7d9ee7bf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/AccessSetter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization/investorAuthorization.go" beforeDir="false" afterPath="$PROJECT_DIR$/authorization/investorAuthorization.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization/startupAuthorization.go" beforeDir="false" afterPath="$PROJECT_DIR$/authorization/startupAuthorization.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteAchievement.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteAchievement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteCase.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteCase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteFavInvestor.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteFavInvestor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteFavStartup.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteFavStartup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteInvestor.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteInvestor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteStartup.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteStartup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteRequests/deleteTeamMember.go" beforeDir="false" afterPath="$PROJECT_DIR$/deleteRequests/deleteTeamMember.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/getRequests/getInvestor.go" beforeDir="false" afterPath="$PROJECT_DIR$/getRequests/getInvestor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/getRequests/getInvestors.go" beforeDir="false" afterPath="$PROJECT_DIR$/getRequests/getInvestors.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/getRequests/getStartup.go" beforeDir="false" afterPath="$PROJECT_DIR$/getRequests/getStartup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/getRequests/getStartups.go" beforeDir="false" afterPath="$PROJECT_DIR$/getRequests/getStartups.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchCase.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchCase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchInvestor.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchInvestor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchInvestorDescription.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchInvestorDescription.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchStartup.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchStartup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchStartupAchievements.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchStartupAchievements.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchStartupDescription.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchStartupDescription.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patchRequests/patchTeam.go" beforeDir="false" afterPath="$PROJECT_DIR$/patchRequests/patchTeam.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regAchievements.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regAchievements.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regCases.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regCases.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regFavouriteInvestor.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regFavouriteInvestor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regFavouriteStartup.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regFavouriteStartup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regInvestor.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regInvestor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regStartup.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regStartup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postRequests/regTeam.go" beforeDir="false" afterPath="$PROJECT_DIR$/postRequests/regTeam.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
