@@ -29,7 +29,6 @@ func RegTeam(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if len(team) > 0 {
-		fmt.Println("tadam")
 		stmt, err := server.DBConn.Prepare("UPDATE startups SET team_size=team_size+? WHERE id=?")
 		if err != nil {
 			log.Fatal(err)
