@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="177ad474-ab6c-49b7-8f91-058e7d9ee7bf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
+=======
+    <list default="true" id="177ad474-ab6c-49b7-8f91-058e7d9ee7bf" name="Changes" comment="" />
+>>>>>>> parent of fcfa5d4 (dockerfile was added)
 =======
     <list default="true" id="177ad474-ab6c-49b7-8f91-058e7d9ee7bf" name="Changes" comment="" />
 >>>>>>> parent of fcfa5d4 (dockerfile was added)
