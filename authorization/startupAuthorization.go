@@ -3,7 +3,6 @@ package authorization
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"net/http"
 )
@@ -13,7 +12,7 @@ func StartupAuthorization(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the request type is not a post")
 		return
 	}
-	other.AccessSetter(w)
+	//other.AccessSetter(w)
 	var authData AuthData
 	err := json.NewDecoder(r.Body).Decode(&authData)
 	if err != nil {

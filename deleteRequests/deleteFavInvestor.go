@@ -3,7 +3,6 @@ package deleteRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -14,7 +13,7 @@ func DeleteFavInvestor(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the request type is not a delete")
 		return
 	}
-	other.AccessSetter(w)
+	//other.AccessSetter(w)
 	var element Element
 	err := json.NewDecoder(r.Body).Decode(&element)
 	if err != nil {

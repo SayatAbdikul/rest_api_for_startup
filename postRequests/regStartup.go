@@ -3,7 +3,6 @@ package postRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
@@ -29,7 +28,7 @@ func RegStartup(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "error: the request is not a POST type")
 		return
 	}
-	other.AccessSetter(w)
+	//other.AccessSetter(w)
 	var query Startup
 	err := json.NewDecoder(r.Body).Decode(&query)
 	if err != nil {
