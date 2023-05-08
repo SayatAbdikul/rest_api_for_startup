@@ -101,7 +101,7 @@ The sample json for request:
 }     
 The response of API: "all data was entered successfully"  
 # Get requests  
-1. sample url request: /startups?region=New%20York&category=Technology&lowestTeam=5&highestTeam=10&lowestInvestment=10000&highestInvestment=50000&sort=ascending      
+1. sample url request: /get_startups?region=New%20York&category=Technology&lowestTeam=5&highestTeam=10&lowestInvestment=10000&highestInvestment=50000&sort=ascending      
 
 The sample json for response:   
 
@@ -202,7 +202,7 @@ The sample json for response:
         }  
     ]  
 }     
-3. sample url request: /investors?region=California&lowestInvestment=100000&highestInvestment=500000&sort=ascending   
+3. sample url request: /get_investors?region=California&lowestInvestment=100000&highestInvestment=500000&sort=ascending   
 
 The sample json for response:   
 [  
@@ -229,7 +229,7 @@ The sample json for response:
 "industry": "Healthcare"  
 }  
 ]    
-4. sample url request: /nvestor?id=1     
+4. sample url request: /get_investor?id=1     
 
 The sample json for response:   
 {  
