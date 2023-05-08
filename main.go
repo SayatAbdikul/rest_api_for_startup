@@ -2,6 +2,8 @@ package main
 
 import (
 	"database/sql"
+	"net/http"
+
 	"github.com/SayatAbdikul/rest_api_for_startup/authorization"
 	delete "github.com/SayatAbdikul/rest_api_for_startup/deleteRequests"
 	get "github.com/SayatAbdikul/rest_api_for_startup/getRequests"
@@ -9,7 +11,6 @@ import (
 	post "github.com/SayatAbdikul/rest_api_for_startup/postRequests"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	_ "github.com/go-sql-driver/mysql"
-	"net/http"
 )
 
 func main() {

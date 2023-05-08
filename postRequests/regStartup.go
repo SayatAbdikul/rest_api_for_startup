@@ -3,9 +3,10 @@ package postRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 type Startup struct {
