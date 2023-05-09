@@ -2,15 +2,12 @@ package other
 
 import (
 	"database/sql"
-	"log"
 
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
-func Connect() {
+func Connect() error {
 	var err error
-	server.DBConn, err = sql.Open("mysql", "root:root@tcp(localhost:8889)/infomatrix_project")
-	if err != nil {
-		log.Fatal(err)
-	}
+	server.DBConn, err = sql.Open("mysql", "admin_root:BMKX55Rnt3MECAHB@tcp(31.172.67.121:3306)/infomatrix_project")
+	return err
 }

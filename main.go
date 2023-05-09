@@ -15,7 +15,7 @@ import (
 
 func main() {
 	var err error
-	server.DBConn, err = sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/infomatrix_project")
+	server.DBConn, err = sql.Open("mysql", "admin_root:BMKX55Rnt3MECAHB@tcp(31.172.67.121:3306)/infomatrix_project")
 	defer server.DBConn.Close()
 	if err != nil {
 		panic(err.Error())
