@@ -13,8 +13,7 @@ RUN go get -u github.com/go-sql-driver/mysql
 # Build Go binary
 RUN go build -o main .
 
-# Expose port 8080
-EXPOSE 9000
+EXPOSE 9001
 
 # Start Go binary when container starts
 CMD ["./main"]
