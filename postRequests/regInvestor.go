@@ -3,9 +3,11 @@ package postRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 type Investor struct {
@@ -22,6 +24,7 @@ type Investor struct {
 }
 
 func RegInvestor(w http.ResponseWriter, r *http.Request) {
+	other.AccessSetter(w)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "error: the request is not a POST type")

@@ -3,9 +3,11 @@ package getRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 type Member struct {
@@ -40,6 +42,7 @@ type WholeStartup struct {
 }
 
 func GetStartup(w http.ResponseWriter, r *http.Request) {
+	other.AccessSetter(w)
 	if r.Method != "GET" {
 		fmt.Fprintf(w, "wrong method type")
 		return

@@ -3,9 +3,11 @@ package postRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 type FavInvestor struct {
@@ -14,6 +16,7 @@ type FavInvestor struct {
 }
 
 func RegFavouriteInvestor(w http.ResponseWriter, r *http.Request) {
+	other.AccessSetter(w)
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "the method of the request is not a post type")
 		return

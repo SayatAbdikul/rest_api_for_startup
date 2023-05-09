@@ -47,5 +47,5 @@ func main() {
 	http.HandleFunc("/delete_team_member", delete.DeleteTeamMember)
 	http.HandleFunc("/auth_startup", authorization.StartupAuthorization)
 	http.HandleFunc("/auth_investor", authorization.InvestorAuthorization)
-	http.ListenAndServe(":9000", nil)
+	http.ListenAndServe(":9001", nil)
 }

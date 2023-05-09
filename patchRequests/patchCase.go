@@ -3,9 +3,11 @@ package patchRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 type Case struct {
@@ -16,6 +18,7 @@ type Case struct {
 }
 
 func PatchCase(w http.ResponseWriter, r *http.Request) {
+	other.AccessSetter(w)
 	if r.Method != "PATCH" {
 		fmt.Fprintf(w, "the method is not patch type")
 		return

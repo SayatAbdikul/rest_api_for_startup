@@ -3,8 +3,10 @@ package authorization
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 type AuthData struct {
@@ -18,6 +20,7 @@ type OutData struct {
 }
 
 func InvestorAuthorization(w http.ResponseWriter, r *http.Request) {
+	other.AccessSetter(w)
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "the request type is not a post")
 		return
