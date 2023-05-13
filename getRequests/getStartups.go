@@ -32,7 +32,6 @@ func GetStartups(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "wrong method type")
 		return
 	}
-	//other.AccessSetter(w)
 	params := r.URL.Query()
 	region := params.Get("region")
 	category := params.Get("category")
@@ -48,7 +47,7 @@ func GetStartups(w http.ResponseWriter, r *http.Request) {
 		ok = 1
 	}
 	if category != "" {
-		request += " category='" + category + "' and"
+		request += " industry='" + category + "' and"
 		ok = 1
 	}
 	if lowestTeam != "" && highestTeam != "" {
