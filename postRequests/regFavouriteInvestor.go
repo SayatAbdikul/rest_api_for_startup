@@ -21,13 +21,16 @@ func RegFavouriteInvestor(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method of the request is not a post type")
 		return
 	}
-	//other.AccessSetter(w)
 	var data FavInvestor
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteFavInvestor.Lock()
+	defer other.MuteFavInvestor.Unlock()
 	query, err := server.DBConn.Prepare("INSERT INTO favourite_investors (investor_id, startup_id) VALUES (?, ?)")
 	if err != nil {
 		log.Fatal(err)

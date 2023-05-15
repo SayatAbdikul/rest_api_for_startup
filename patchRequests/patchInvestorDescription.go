@@ -21,19 +21,22 @@ func PatchInvestorDescription(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var newContent InvestorDescription
 	err := json.NewDecoder(r.Body).Decode(&newContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteInvestor.Lock()
+	defer other.MuteInvestor.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE investors SET description=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(newContent.Description, newContent.InvestorID)
 	if err != nil {
 		log.Fatal(err)

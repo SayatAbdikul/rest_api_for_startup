@@ -22,6 +22,8 @@ func StartupAuthorization(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 	var data OutData
+	other.Connect()
+	defer server.DBConn.Close()
 	query, err := server.DBConn.Prepare("SELECT id, login FROM startups WHERE login=? and password=?")
 	rows, err := query.Query(authData.Login, authData.Password)
 	defer rows.Close()

@@ -28,6 +28,10 @@ func RegFavouriteStartup(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteFavStartup.Lock()
+	defer other.MuteFavStartup.Unlock()
 	query, err := server.DBConn.Prepare("INSERT INTO favourite_startups (startup_id, investor_id) VALUES (?, ?)")
 	if err != nil {
 		log.Fatal(err)

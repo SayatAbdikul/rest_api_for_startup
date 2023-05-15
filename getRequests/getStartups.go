@@ -28,6 +28,8 @@ type Startup struct {
 
 func GetStartups(w http.ResponseWriter, r *http.Request) {
 	other.AccessSetter(w)
+	other.Connect()
+	defer server.DBConn.Close()
 	if r.Method != "GET" {
 		fmt.Fprintf(w, "wrong method type")
 		return

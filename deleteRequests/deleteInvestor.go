@@ -3,9 +3,11 @@ package deleteRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 func DeleteInvestor(w http.ResponseWriter, r *http.Request) {
@@ -19,16 +21,24 @@ func DeleteInvestor(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.MuteInvestor.Lock()
+	defer other.MuteInvestor.Unlock()
+	other.Connect()
+	defer server.DBConn.Close()
 	_, err = server.DBConn.Exec("DELETE FROM investors WHERE id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	other.MuteFavStartup.Lock()
+	defer other.MuteFavStartup.Unlock()
 	_, err = server.DBConn.Exec("DELETE FROM favourite_startups WHERE investor_id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	other.MuteCase.Lock()
+	defer other.MuteCase.Unlock()
 	_, err = server.DBConn.Exec("DELETE FROM cases WHERE investor_id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)

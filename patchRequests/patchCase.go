@@ -23,19 +23,22 @@ func PatchCase(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var newContent Case
 	err := json.NewDecoder(r.Body).Decode(&newContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteCase.Lock()
+	defer other.MuteCase.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE cases SET title=?, description=?, investment=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(newContent.Title, newContent.Description, newContent.Investment, newContent.ID)
 	if err != nil {
 		log.Fatal(err)

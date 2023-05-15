@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 
 	"github.com/SayatAbdikul/rest_api_for_startup/other"
 	"github.com/SayatAbdikul/rest_api_for_startup/server"
@@ -18,8 +19,8 @@ type Case struct {
 }
 
 func RegCases(w http.ResponseWriter, r *http.Request) {
+	var wg sync.WaitGroup
 	other.AccessSetter(w)
-	//other.AccessSetter(w)
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "error: the request is not a POST type")
 		return
@@ -31,17 +32,26 @@ func RegCases(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, val := range data {
-		stmt, err := server.DBConn.Prepare("INSERT INTO cases (title, description, investment, investor_id) VALUES (?, ?, ?, ?)")
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
-		_, err = stmt.Exec(val.Title, val.Description, val.Investment, val.InvestorID)
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
-		stmt.Close()
+		wg.Add(1)
+		go func(val Case) {
+			other.MuteCase.Lock()
+			defer other.MuteCase.Unlock()
+			wg.Done()
+			other.Connect()
+			defer server.DBConn.Close()
+			stmt, err := server.DBConn.Prepare("INSERT INTO cases (title, description, investment, investor_id) VALUES (?, ?, ?, ?)")
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			_, err = stmt.Exec(val.Title, val.Description, val.Investment, val.InvestorID)
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			stmt.Close()
+		}(val)
 	}
+	wg.Wait()
 	fmt.Fprintf(w, "all records were saved")
 }

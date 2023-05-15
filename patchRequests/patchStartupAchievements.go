@@ -21,19 +21,22 @@ func PatchStartupAchievement(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var newContent Achievement
 	err := json.NewDecoder(r.Body).Decode(&newContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteAchievement.Lock()
+	defer other.MuteAchievement.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE achievements SET achievement=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(newContent.Achievement, newContent.ID)
 	if err != nil {
 		log.Fatal(err)

@@ -1,4 +1,4 @@
-package tests
+package postRequests_test
 
 import (
 	"bytes"
@@ -28,10 +28,7 @@ type Startup struct {
 }
 
 func TestRegStartup(t *testing.T) {
-	err := other.Connect()
-	if err != nil {
-		t.Fatalf("failed to connect to database: %v", err)
-	}
+	other.Connect()
 	defer server.DBConn.Close()
 	load := Startup{"название на кириллице", "test_startup", "test_password", "test@example.com", "This is a test startup.",
 		"https://example.com/test_startup_logo.jpg", 1000, 10000, "Kazakhstan", "https://teststartup.com", "IT"}

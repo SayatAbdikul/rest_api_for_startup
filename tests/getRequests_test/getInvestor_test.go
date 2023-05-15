@@ -12,10 +12,7 @@ import (
 )
 
 func TestGetInvestor(t *testing.T) {
-	err := other.Connect()
-	if err != nil {
-		t.Fatalf("failed to connect to database: %v", err)
-	}
+	other.Connect()
 	defer server.DBConn.Close()
 	req, err := http.NewRequest("GET", "/get_investor?id=4", nil)
 	if err != nil {

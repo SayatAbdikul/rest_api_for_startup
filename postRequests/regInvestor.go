@@ -30,13 +30,16 @@ func RegInvestor(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "error: the request is not a POST type")
 		return
 	}
-	//other.AccessSetter(w)
 	var query Investor
 	err := json.NewDecoder(r.Body).Decode(&query)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteInvestor.Lock()
+	defer other.MuteInvestor.Unlock()
 	stmt, err := server.DBConn.Prepare("INSERT INTO investors (name, login, password, email, " +
 		"description, picture, region, website, investment, industry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	defer stmt.Close()

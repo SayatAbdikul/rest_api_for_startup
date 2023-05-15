@@ -3,9 +3,11 @@ package deleteRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 func DeleteCase(w http.ResponseWriter, r *http.Request) {
@@ -19,6 +21,10 @@ func DeleteCase(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.MuteCase.Lock()
+	defer other.MuteCase.Unlock()
+	other.Connect()
+	defer server.DBConn.Close()
 	_, err = server.DBConn.Exec("DELETE FROM cases WHERE id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)

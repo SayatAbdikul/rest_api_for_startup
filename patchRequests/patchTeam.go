@@ -23,19 +23,22 @@ func PatchTeam(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var newContent Member
 	err := json.NewDecoder(r.Body).Decode(&newContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteMember.Lock()
+	defer other.MuteMember.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE team SET name=?, role=?, description=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(newContent.Name, newContent.Role, newContent.Description, newContent.ID)
 	if err != nil {
 		log.Fatal(err)

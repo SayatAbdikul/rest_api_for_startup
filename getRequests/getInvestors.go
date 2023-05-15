@@ -28,7 +28,8 @@ func GetInvestors(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "wrong method type")
 		return
 	}
-	//other.AccessSetter(w)
+	other.Connect()
+	defer server.DBConn.Close()
 	params := r.URL.Query()
 	region := params.Get("region")
 	lowestInvestment := params.Get("lowestInvestment")

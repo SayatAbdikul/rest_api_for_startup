@@ -30,20 +30,23 @@ func PatchStartup(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var startup Startup
 	err := json.NewDecoder(r.Body).Decode(&startup)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteStartup.Lock()
+	defer other.MuteStartup.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE startups SET name=?, login=?, password=?, email=?, " +
 		"logo=?, lowest_investment=?, highest_investment=?, region=?, website=?, industry=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(&startup.Name, &startup.Login, &startup.Password, &startup.Email,
 		&startup.Logo, &startup.LowestInvestment, &startup.HighestInvestment, &startup.Region, &startup.WebSite, &startup.Industry, &startup.ID)
 	if err != nil {

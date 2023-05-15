@@ -21,6 +21,7 @@ type OutData struct {
 
 func InvestorAuthorization(w http.ResponseWriter, r *http.Request) {
 	other.AccessSetter(w)
+
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "the request type is not a post")
 		return
@@ -32,8 +33,10 @@ func InvestorAuthorization(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 	var data OutData
-	query, err := server.DBConn.Prepare("SELECT id, login FROM investors WHERE login=? and password=?")
-	rows, err := query.Query(authData.Login, authData.Password)
+	other.Connect()
+	defer server.DBConn.Close()
+	query, _ := server.DBConn.Prepare("SELECT id, login FROM investors WHERE login=? and password=?")
+	rows, _ := query.Query(authData.Login, authData.Password)
 	defer rows.Close()
 	for rows.Next() {
 		rows.Scan(&data.ID, &data.Login)
@@ -41,7 +44,7 @@ func InvestorAuthorization(w http.ResponseWriter, r *http.Request) {
 	if data.Login == "" {
 		data.ErrorStatus = true
 	}
-	jsonBytes, err := json.Marshal(data)
+	jsonBytes, _ := json.Marshal(data)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonBytes)
 }

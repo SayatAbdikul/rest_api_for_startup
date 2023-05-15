@@ -47,7 +47,8 @@ func GetStartup(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "wrong method type")
 		return
 	}
-	//other.AccessSetter(w)
+	other.Connect()
+	defer server.DBConn.Close()
 	params := r.URL.Query()
 	id := params.Get("id")
 	query := server.DBConn.QueryRow("SELECT * FROM startups WHERE id=?", id)

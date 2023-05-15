@@ -21,19 +21,22 @@ func PatchStartupDescription(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var newContent StartupDescription
 	err := json.NewDecoder(r.Body).Decode(&newContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteStartup.Lock()
+	defer other.MuteStartup.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE startups SET description=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(newContent.Description, newContent.StartupID)
 	if err != nil {
 		log.Fatal(err)

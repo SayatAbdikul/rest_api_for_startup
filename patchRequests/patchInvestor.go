@@ -29,20 +29,23 @@ func PatchInvestor(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "the method is not patch type")
 		return
 	}
-	//other.AccessSetter(w)
 	var investor Investor
 	err := json.NewDecoder(r.Body).Decode(&investor)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.Connect()
+	defer server.DBConn.Close()
+	other.MuteInvestor.Lock()
+	defer other.MuteInvestor.Unlock()
 	query, err := server.DBConn.Prepare("UPDATE investors SET name=?, login=?, password=?, email=?, " +
 		"picture=?, region=?, website=?, investment=?, industry=? WHERE id=?")
-	defer query.Close()
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+	defer query.Close()
 	_, err = query.Exec(&investor.Name, &investor.Login, &investor.Password, &investor.Email,
 		&investor.Picture, &investor.Region, &investor.WebSite, &investor.Investment, &investor.Industry, &investor.ID)
 	if err != nil {

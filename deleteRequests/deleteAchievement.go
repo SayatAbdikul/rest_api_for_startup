@@ -3,22 +3,27 @@ package deleteRequests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/SayatAbdikul/rest_api_for_startup/server"
 	"log"
 	"net/http"
+
+	"github.com/SayatAbdikul/rest_api_for_startup/other"
+	"github.com/SayatAbdikul/rest_api_for_startup/server"
 )
 
 func DeleteAchievement(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "DELETE" {
 		fmt.Fprintf(w, "the method of request is not delete")
 	}
-	//other.AccessSetter(w)
 	var element Element
 	err := json.NewDecoder(r.Body).Decode(&element)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	other.MuteAchievement.Lock()
+	defer other.MuteAchievement.Unlock()
+	other.Connect()
+	defer server.DBConn.Close()
 	_, err = server.DBConn.Exec("DELETE FROM achievements WHERE id=?", element.ID)
 	if err != nil {
 		log.Fatal(err)
